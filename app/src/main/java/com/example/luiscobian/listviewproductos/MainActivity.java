@@ -1,12 +1,15 @@
 package com.example.luiscobian.listviewproductos;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,5 +42,21 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText("Categoria elegido: " + categoria[position]);
             }
         });
+    }
+
+    public void llamaVentana(View w)
+    {
+        Log.e("Verifica Click", "click");
+        Intent i = new Intent(this, AgregarActivity.class);
+        startActivityForResult(i,4543);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+
+        String cad = data.getStringExtra("mensaje");
+        Toast.makeText(this, cad, Toast.LENGTH_LONG).show();
+
     }
 }
