@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -42,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText("Categoria elegido: " + categoria[position]);
             }
         });
+
+        registerForContextMenu(lista);
     }
 
     public void llamaVentana(View w)
@@ -59,4 +65,83 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, cad, Toast.LENGTH_LONG).show();
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater i = getMenuInflater();
+        i.inflate(R.menu.menu_principal, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case R.id.op_salir:
+                Toast.makeText(this, "Saliendo", Toast.LENGTH_LONG)
+                        .show();
+                break;
+            case R.id.op_info:
+                Toast.makeText(this, "Informacion", Toast.LENGTH_LONG)
+                        .show();
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        AdapterView.AdapterContextMenuInfo info =
+                (AdapterView.AdapterContextMenuInfo) menuInfo;
+
+        menu.setHeaderTitle(lista.getAdapter().getItem(info.position).toString());
+        getMenuInflater().inflate(R.menu.menu_emergente, menu);
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info  =
+                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()){
+
+            case R.id.emergente_1:
+                String nombre = productos[info.position]; // Lproductos.get(info.position);
+                Toast.makeText(this, "Se modificara " + nombre,
+                        Toast.LENGTH_LONG)
+                        .show();
+                break;
+            case R.id.emergente_2:
+                String nombre2 = productos[info.position];
+                Toast.makeText(this, "Se Eliminara " + nombre2,
+                        Toast.LENGTH_LONG)
+                        .show();
+                break;
+        }
+        return true;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -30,4 +30,13 @@
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="110dp"
+        android:layout_height="82dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@android:drawable/arrow_down_float"
+        tools:layout_editor_absoluteX="186dp"
+        tools:layout_editor_absoluteY="314dp" />
 </android.support.constraint.ConstraintLayout>
